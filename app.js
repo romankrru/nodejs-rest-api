@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.use('/products', productsRoute);
-app.use('/order', ordersRoute);
+app.use('/orders', ordersRoute);
 
 // error handling
 app.use((req, res, next) => {
