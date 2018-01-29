@@ -6,10 +6,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 mongoose.connect(
-  'mongodb://node-rest-shop:' + process.env.MONGO_ATLAS_PW+'@node-rest-shop-shard-00-00-r6e2v.mongodb.net:27017,node-rest-shop-shard-00-01-r6e2v.mongodb.net:27017,node-rest-shop-shard-00-02-r6e2v.mongodb.net:27017/test?ssl=true&replicaSet=node-rest-shop-shard-0&authSource=admin',
-  {
-    useMongoClient: true,
-  }
+  'mongodb://node-rest-shop:' + process.env.MONGO_ATLAS_PW+'@node-rest-shop-shard-00-00-r6e2v.mongodb.net:27017,node-rest-shop-shard-00-01-r6e2v.mongodb.net:27017,node-rest-shop-shard-00-02-r6e2v.mongodb.net:27017/test?ssl=true&replicaSet=node-rest-shop-shard-0&authSource=admin'
 );
 
 const productsRoute = require('./api/routes/products');
