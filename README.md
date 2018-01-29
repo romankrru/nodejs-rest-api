@@ -263,10 +263,35 @@ $.ajax({
 - URL params:
 `productId`
 - Data params:
-none
+```
+[
+  ...
+  {
+	"propName": "price", // name of property to be updated
+	"value": 10 // new value 
+  },
+  {
+    ...
+  }
+  ...
+]
+```
 - Success response:
   - Code: `200`
-  - Content: `{}`
+  - Content:
+  Something like this:
+    ```
+    {
+      "n": 1,
+      "nModified": 0,
+      "opTime": {
+          "ts": "6516535818436214785",
+          "t": 1
+      },
+      "electionId": "7fffffff0000000000000001",
+      "ok": 1
+    }
+    ```
 - Error response:
   - Code: `404`
   - Content: `{ error: {message: 'Not found'} }`
@@ -275,7 +300,10 @@ none
 $.ajax({
     url: "/products/dsfdaklhfahdsjkfhjdaf",
     dataType: "json",
-    data: data,
+    data: [{
+      propName: "price",
+      value: 10
+    }],
     type : "PATCH",
     success : function(r) {
       console.log(r);
