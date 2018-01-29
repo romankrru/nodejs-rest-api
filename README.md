@@ -279,8 +279,9 @@ $.ajax({
 - Success response:
   - Code: `200`
   - Content:
-  Something like this:
+  
     ```
+    // Something like this:
     {
       "n": 1,
       "nModified": 0,
