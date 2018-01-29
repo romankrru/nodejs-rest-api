@@ -139,7 +139,32 @@ none
 none
 - Success response:
   - Code: `200`
-  - Content: `{}`
+  - Content:
+  ```
+  {
+    "count": 2,
+    "products": [
+      {
+        "_id": "5a6f625be3da8e2b381bbbdc",
+        "name": "Harry Potter",
+        "price": 10,
+        "request": {
+          "type": "GET",
+          "url": "http://localhost:3000/products/5a6f625be3da8e2b381bbbdc"
+        }
+        },
+        {
+          "_id": "5a6f67555a9392144c045bab",
+          "name": "Animal Farm",
+          "price": 12,
+          "request": {
+            "type": "GET",
+            "url": "http://localhost:3000/products/5a6f67555a9392144c045bab"
+          }
+        },
+    ]
+  }
+  ```
 - Error response:
   - Code: `404`
   - Content: `{ error: {message: 'Not found'} }`
@@ -165,18 +190,25 @@ $.ajax({
 - Data params:
 ```
 {
-  "name": "The Hobbit",
-  "price": "4.99",
+  "name"[String, required]: "The Hobbit",
+  "price"[Number, required]: 4.99,
 }
 ```
 - Success response:
   - Code: `201`
   - Content:
 ```
-// created product
 {
-  "name": "The Hobbit",
-  "price": "4.99",
+    "message": "Created successfully",
+    "createdProduct": {
+        "_id": "5a6f713891ceb00c6005eed9",
+        "name": "The Hobbit",
+        "price": 4.99,
+        "request": {
+            "type": "GET",
+            "url": "http://localhost:3000/products/5a6f713891ceb00c6005eed9"
+        }
+    }
 }
 ```
 - Error response:
@@ -190,7 +222,7 @@ $.ajax({
     type : "POST",
     data: {
       name: "The Hobbit",
-      quantity: "4.99"
+      price: 4.99
     },
     success : function(r) {
       console.log(r);
@@ -210,7 +242,14 @@ $.ajax({
 none
 - Success response:
   - Code: `200`
-  - Content: `{}`
+  - Content:
+  ```
+  {
+    "_id": "5a6f713891ceb00c6005eed9",
+    "name": "Animal Farm",
+    "price": 13
+  }
+  ```
 - Error response:
   - Code: `404`
   - Content: `{ error: {message: 'Not found'} }`
@@ -238,7 +277,12 @@ $.ajax({
 none
 - Success response:
   - Code: `200`
-  - Content: `{}`
+  - Content:
+  ```
+  {
+    "message": "Deleted successfully"
+  }
+  ```
 - Error response:
   - Code: `404`
   - Content: `{ error: {message: 'Not found'} }`
@@ -264,33 +308,24 @@ $.ajax({
 `productId`
 - Data params:
 ```
+// array of objects
 [
-  ...
   {
 	"propName": "price", // name of property to be updated
 	"value": 10 // new value 
-  },
-  {
-    ...
   }
-  ...
 ]
 ```
 - Success response:
   - Code: `200`
   - Content:
-  
     ```
-    // Something like this:
     {
-      "n": 1,
-      "nModified": 0,
-      "opTime": {
-          "ts": "6516535818436214785",
-          "t": 1
-      },
-      "electionId": "7fffffff0000000000000001",
-      "ok": 1
+      "message": "Updated successfully",
+      "request": {
+        "type": "GET",
+        "url": "http://localhost:3000/products/5a6f625be3da8e2b381bbbdc"
+      }
     }
     ```
 - Error response:
@@ -299,7 +334,7 @@ $.ajax({
 - Sample call:
 ```
 $.ajax({
-    url: "/products/dsfdaklhfahdsjkfhjdaf",
+    url: "/products/5a6f625be3da8e2b381bbbdc",
     dataType: "json",
     data: [{
       propName: "price",
