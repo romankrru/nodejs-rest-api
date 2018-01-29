@@ -6,11 +6,25 @@ const Product = require('../models/product');
 
 router.get('/', (req, res, next) => {
   Product.find()
+    .select('name price _id')
     .exec()
     .then(docs => {
-      console.log(docs);
+      const response = {
+        count: docs.length,
+        products: docs.map(doc => (
+          {
+            _id: doc._id,
+            name: doc.name,
+            price: doc.price,
+            request: {
+              type: 'GET',
+              url: `${process.env.HOME_URL}/products/${doc._id}`
+            },
+          }
+        )),
+      };
       res.status(200);
-      res.json(docs);
+      res.json(response);
     })
     .catch(err => {
       console.log(err);
@@ -33,8 +47,16 @@ router.post('/', (req, res, next) => {
     .then(result => {
       console.log(result);
       res.status(201).json({
-        message: 'Handling POST request to /products',
-        createdProduct: product,
+        message: 'Created successfully',
+        createdProduct: {
+          _id: product._id,
+          name: product.name,
+          price: product.price,
+          request: {
+            type: 'GET',
+            url: `${process.env.HOME_URL}/products/${product._id}`
+          },
+        },
       });
     })
     .catch(err => {
@@ -54,7 +76,13 @@ router.get('/:productId', (req, res, next) => {
     .then(doc => {
       console.log(doc);
       if (doc) {
-        res.status(200).json(doc);
+        const response = {
+          _id: doc._id,
+          name: doc.name,
+          price: doc.price,
+        };
+
+        res.status(200).json(response);
       } else {
         res.status(404);
         res.json({
@@ -84,9 +112,14 @@ router.patch('/:productId', (req, res, next) => {
   })
   .exec()
   .then(result => {
-    console.log(result);
     res.status(200);
-    res.json(result);
+    res.json({
+      message: 'Updated successfully',
+      request: {
+        type: 'GET',
+        url: `${process.env.HOME_URL}/products/${id}`
+      }
+    });
   })
   .catch(err => {
     console.log(err);
@@ -105,7 +138,9 @@ router.delete('/:productId', (req, res, next) => {
   })
     .exec()
     .then(result => {
-      res.status(200).json(result);
+      res.status(200).json({
+        message: 'Deleted successfully',
+      });
     })
     .catch(err => {
       console.log(err);
