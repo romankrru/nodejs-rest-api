@@ -19,7 +19,11 @@ none
     "orders": [
       {
         "_id": "5a70180aa9f9512a345124bb",
-        "product": "5a6f625be3da8e2b381bbbdc",
+        "product": {
+          "_id": "5a6f625be3da8e2b381bbbdc",
+          "name": "Harry Potter",
+          "price": 320
+        },
         "request": {
           "type": "GET",
           "url": "http://localhost:3000/orders/5a70180aa9f9512a345124bb"
@@ -27,7 +31,11 @@ none
       },
       {
         "_id": "5a701825fff79701a04b011c",
-        "product": "5a6f625be3da8e2b381bbbdc",
+        "product": {
+          "_id": "5a6f625be3da8e2b381bbbdc",
+          "name": "product name",
+          "price": 20
+        },
         "request": {
           "type": "GET",
           "url": "http://localhost:3000/orders/5a701825fff79701a04b011c"
@@ -117,7 +125,11 @@ none
   ```
   {
     "_id": "5a7021d15f7fbc253cee3534",
-    "product": "5a6f625be3da8e2b381bbbdc",
+    "product": {
+      "_id": "5a6f625be3da8e2b381bbbdc",
+      "name": "product name",
+      "price": 20
+    }
     "quantity": 1
   }
   ```
